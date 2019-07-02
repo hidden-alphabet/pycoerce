@@ -113,8 +113,7 @@ class PostgresTypeEncoder:
                 '''
             )
 
-
-def dumps(obj, hooks=None):
+def dumps(obj, hooks={}):
     '''
     Description
     -----------
