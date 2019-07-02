@@ -129,19 +129,22 @@ def dumps(obj, hooks={}):
 
     Example
     -------
-    >>> from coerceion.to import postgresql
+    >>> import pycoerce.postgresql as py2pg
     >>> from datetime import datetime
-
     >>> example1 = { "foo": "bar", "baz": 5, "buz": datetime.now() }
-    >>> postgresql.dumps(example, hooks={ datetime: 'datetime' })
-    { "foo": "varchar", "baz": "integer", "buz": "datetime" }
+    >>> py2pg.dumps(example1, hooks={ datetime: 'datetime' })
+    {'foo': 'text', 'baz': 'integer', 'buz': 'datetime'}
 
     >>> example2 = [ 1, "test", True ]
-    >>> postgresql.dumps(example2, hooks={ str: 'text' })
-    ['int', 'text', 'boolean']
+    >>> py2pg.dumps(example2, hooks={ str: 'varchar' })
+    ['integer', 'varchar', 'boolean']
 
-    >>> postgresql.dumps("test")
-    'varchar'
+    >>> py2pg.dumps("test")
+    'text'
     '''
 
     return PostgresTypeEncoder(hooks).encode(obj)
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
