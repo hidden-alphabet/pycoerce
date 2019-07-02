@@ -12,11 +12,11 @@ NESTED = [ range, iter, list, dict, tuple, set, frozenset ]
 # corresponding type in SQL.
 UNSUPPORTED = [ complex ]
 
-class PostgreSQLEncoder:
+class PostgresTypeEncoder:
     '''
     Description
     -----------
-    PostgreSQLEncoder encodes Python objects into the corresponding
+    PostgresTypeEncoder encodes Python objects into the corresponding
     types in SQL with the aim of allowing for dynamic SQL queries that
     require type information.
     '''
@@ -107,7 +107,7 @@ class PostgreSQLEncoder:
         else:
             raise TypeError(
                 '''
-                PostgreSQLEncoder cannot encode objects of type '{}' to an SQL
+                PostgresTypeEncoder cannot encode objects of type '{}' to an SQL
                 equivalent 
                 '''
             )
@@ -144,4 +144,4 @@ def dumps(obj, hooks=None):
     'varchar'
     '''
 
-    return PostgreSQLEncoder(hooks).encode(obj)
+    return PostgresTypeEncoder(hooks).encode(obj)
