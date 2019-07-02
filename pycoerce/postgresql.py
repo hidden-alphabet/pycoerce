@@ -27,16 +27,17 @@ class PostgresTypeEncoder:
             raise TypeError("The 'hooks' argument must be a dictionary from classes to, either strings or callables.")
 
         self.hooks = {
-            None: self._reject_type,
-            type(None): self._reject_type, 
-            **hooks,
             int: 'integer',
             bool: 'boolean',
             bytes: 'bytea',
             bytearray: 'bytea',
             memoryview: 'bytea',
             float: 'real',
-            str: 'text'
+            str: 'text',
+            **hooks,
+            None: self._reject_type,
+            type(None): self._reject_type,
+
         }
     
     def _reject_type(self, t):
