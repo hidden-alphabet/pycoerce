@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+for file in $(git diff --staged --name-only); do
+  case $file in
+    *pycoerce/*)
+      pylint $file 
+    ;;
+  esac
+done
+
