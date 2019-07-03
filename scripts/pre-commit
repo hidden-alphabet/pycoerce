@@ -3,7 +3,8 @@
 for file in $(git diff --staged --name-only); do
   case $file in
     *pycoerce/*)
-      python -v $file
+      python setup.py develop
+      python test.py -v
       pylint $file
     ;;
   esac
